@@ -8,6 +8,7 @@ class ScheduleCrawler < ApplicationController
   URL = 'batch/201507.html'
 
   class << self
+
     def execute
       # メイン処理
       #logger.info "crawl start."
@@ -39,9 +40,11 @@ class ScheduleCrawler < ApplicationController
         year = Date.today.year
       end
 
+      # データをINSERT/UPDATEする
       work.each do |w|
-        record = Schedule.where(:date => "#{year}#{w[:date]}")
+        record = Schedule.where(:date => "#{year}#{w[:date]}") # "20150701"のようになる
         if record.empty?
+          # 新規追加
           @schedule = Schedule.new
           @schedule.date     = "#{year}#{w[:date]}"
           @schedule.presents = w[:presents]
