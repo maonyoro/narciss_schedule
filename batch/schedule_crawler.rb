@@ -15,10 +15,11 @@ class ScheduleCrawler < ApplicationController
       get_detail
     end
 
+    # HTML取得しパース、DBへ格納するメソッド
     def get_detail
       # URLにアクセスし、得られたHTMLからパース用オブジェクトdocを生成
-      html = open(URL) { |f| f.read }
-      doc  = Nokogiri::HTML.parse(html, nil, 'shift-jis')
+      html = open(URL).read
+      doc  = Nokogiri::HTML.parse(html, nil, 'CP932')
   
       # docをパースして、スケジュールの内容をwork[]にpushする
       work = []
@@ -30,7 +31,6 @@ class ScheduleCrawler < ApplicationController
         band     = day.css('div[@class="sband"]').inner_text.gsub(/[　\n]/,"")
         work.push({:date => date, :presents => presents, :title => title, :open => open, :band => band})
       end
-      binding.pry
 
       # HTMLから年を取得 うまく取得できなかったらDateクラスから取得する
       /20../ =~ doc.xpath('//th[@class="month"]').inner_text
@@ -40,7 +40,6 @@ class ScheduleCrawler < ApplicationController
       end
 
       work.each do |w|
-        #binding.pry
         record = Schedule.where(:date => "#{year}#{w[:date]}")
         if record.empty?
           @schedule = Schedule.new
