@@ -42,11 +42,12 @@ class ScheduleCrawler < ApplicationController
 
       # データをINSERT/UPDATEする
       work.each do |w|
-        record = Schedule.where(:date => "#{year}#{w[:date]}") # "20150701"のようになる
+        current_date = "#{year}-#{w[:date]}".clone.insert(7, "-") # "2015-07-01"
+        record = Schedule.where(:date => current_date)
         if record.empty?
           # 新規追加
           @schedule = Schedule.new
-          @schedule.date     = "#{year}#{w[:date]}"
+          @schedule.date     = current_date
           @schedule.presents = w[:presents]
           @schedule.title    = w[:title]
           @schedule.open     = w[:open]
