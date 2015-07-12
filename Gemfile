@@ -23,11 +23,15 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# add
+##### add
 gem 'haml-rails'
 gem 'anemone' # web crawler
 gem 'nokogiri'
 gem 'faraday' # http client
+
+# Calendar
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 group :development, :test do
   gem 'pry-byebug'
