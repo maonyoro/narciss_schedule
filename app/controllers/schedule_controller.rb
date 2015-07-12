@@ -6,4 +6,19 @@ class ScheduleController < ApplicationController
     @schedule = Schedule.all
   end
 
+  def json
+    @schedule = Schedule.all
+
+    json_data = []
+    @schedule.each do |s|
+      json_data.push({
+        title: s.title,
+        start: s.date,
+        description: s.band
+      })
+    end
+
+    render :json => json_data
+  end
+
 end

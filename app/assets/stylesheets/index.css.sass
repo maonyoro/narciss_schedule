@@ -1,3 +1,5 @@
+$mobile: "only screen and (max-width:800px)"
+
 *
   font-family: 'Roboto','Lato','Lucida Grande',"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif
   font-size: 12px
@@ -6,6 +8,8 @@
 
 body
   width: 800px
+  @media #{$mobile}
+    width: 100%
   margin: 0 auto
 
 h1
