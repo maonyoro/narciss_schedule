@@ -1,0 +1,23 @@
+#header
+  %h1 Schedule at Urawa Narciss
+#detail
+  - @schedule.each do |s|
+    %h2= s.date
+    %h3= "#{s.presents} #{s.title}"
+    .open= s.open
+    .contents= s.band
+
+  /%table
+  /  %tr
+  /    %th= Schedule.human_attribute_name("date")
+  /    %th= Schedule.human_attribute_name("presents")
+  /    %th= Schedule.human_attribute_name("title")
+  /    %th= Schedule.human_attribute_name("open")
+  /    %th= Schedule.human_attribute_name("band")
+  /  - @schedule.each do |s|
+  /    %tr
+  /      %td.date= s.date
+  /      %td.presents= s.presents
+  /      %td.title= s.title
+  /      %td.open= s.open
+  /      %td.band= s.band
