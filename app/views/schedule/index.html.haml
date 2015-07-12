@@ -3,10 +3,11 @@
 #detail
   - @schedule.each do |s|
     .day
-      %h2= s.date
+      %h2= s.date.clone.insert(4, "/").insert(7, "/")
       %h3= "#{s.presents} #{s.title}"
-      .open= s.open
-      .contents= s.band
+      .open= s.open.gsub("\\","￥").gsub("\/", "／")
+      .contents
+        =s.band
 
   /%table
   /  %tr
