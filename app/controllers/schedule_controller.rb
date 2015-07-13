@@ -15,7 +15,8 @@ class ScheduleController < ApplicationController
         title: s.title,
         start: s.date,
         description: s.band,
-        url: "/"
+        #url: "/",
+        className: "open-modal"
       })
     end
 

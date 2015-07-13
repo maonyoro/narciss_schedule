@@ -17,3 +17,4 @@
 //
 //= require moment
 //= require fullcalendar
+//= require jquery.modal
