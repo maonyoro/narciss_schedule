@@ -14,7 +14,8 @@ class ScheduleController < ApplicationController
       json_data.push({
         title: s.title,
         start: s.date,
-        description: s.band
+        description: s.band,
+        url: "/"
       })
     end
 
