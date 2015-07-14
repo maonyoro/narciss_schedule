@@ -15,12 +15,18 @@ class ScheduleController < ApplicationController
         title: s.title,
         start: s.date,
         description: s.band,
-        #url: "/",
+        url: "./ajax?date=#{s.date}",
         className: "open-modal"
       })
     end
 
     render :json => json_data
+  end
+
+  def ajax
+    param = params[:date]
+    @schedule = Schedule.where(:date => param).first
+    render :text => "#{param} #{@schedule.title} #{@schedule.band}"
   end
 
 end
