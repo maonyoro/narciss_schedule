@@ -1,0 +1,8 @@
+/ modal-window用部分テンプレート
+/ Ajaxで @schedule を動的に取得してレンダリングする
+.day
+  %h2= @schedule.date
+  %h3= "#{@schedule.presents} #{@schedule.title}"
+  .open= @schedule.open.gsub("\\","￥").gsub("\/", "／")
+  .contents
+    =@schedule.band
