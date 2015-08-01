@@ -16,7 +16,7 @@ class ScheduleController < ApplicationController
         start: s.date,
         description: s.band,
         url: "./ajax?date=#{s.date}",
-        className: "open-modal"
+        className: "open-modal calendar-content"
       })
     end
 
