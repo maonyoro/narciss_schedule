@@ -14,7 +14,8 @@ class ScheduleController < ApplicationController
     json_data = []
     @schedule.each do |s|
       json_data.push({
-        title: s.title,
+        #title: s.title,
+        title: s.band,
         start: s.date,
         description: s.band,
         url: "./ajax?date=#{s.date}",
