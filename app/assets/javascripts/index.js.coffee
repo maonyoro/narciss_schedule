@@ -27,14 +27,14 @@ $ ->
       console.log 'ajax error.'
 
   # when modal-window is closed
-  $(".modal").on $.modal.CLOSE, ->
+  $('.modal').on $.modal.CLOSE, ->
     console.log 'close!'
     $('#modalwindow').empty()
 
-  # change color '/'
-  change_color = ->
-    $('.fc-title').each ->
-      txt = $(@).html()
-      $(@).html(
-        txt.replace(/\//g, '<span class="red">/</span>')
-      )
+## function for change color '/'
+change_color = ->
+  $('.fc-title').each ->
+    txt = $(@).html()
+    $(@).html(
+      txt.replace(/\//g, '<span class="red">/</span>')
+    )
