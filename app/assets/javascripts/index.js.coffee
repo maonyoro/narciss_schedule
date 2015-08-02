@@ -4,6 +4,9 @@ $ ->
     firstDay: 1,
     timezone: "Asia/Tokyo",
     eventLimitText: "+2",
+    #eventAfterRender: 
+    eventAfterAllRender: ->
+      change_color()
   })
 
   $(document).on 'click', '.open-modal', (e) ->
@@ -27,3 +30,11 @@ $ ->
   $(".modal").on $.modal.CLOSE, ->
     console.log 'close!'
     $('#modalwindow').empty()
+
+  # change color '/'
+  change_color = ->
+    $('.fc-title').each ->
+      txt = $(@).html()
+      $(@).html(
+        txt.replace(/\//g, '<span class="red">/</span>')
+      )

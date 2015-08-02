@@ -13,9 +13,11 @@ class ScheduleController < ApplicationController
 
     json_data = []
     @schedule.each do |s|
+      next_str = ''
+      next_str = '...' if s.band.length > 120
       json_data.push({
         #title: s.title,
-        title: s.band,
+        title: "#{s.band[0..120].gsub(/※.*/,'')}#{next_str}",
         start: s.date,
         description: s.band,
         url: "./ajax?date=#{s.date}",
