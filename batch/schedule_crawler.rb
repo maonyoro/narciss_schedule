@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'date'
+require 'nkf'
 
 class ScheduleCrawler < ApplicationController
   class CrawlError < StandardError; end
@@ -29,7 +30,7 @@ class ScheduleCrawler < ApplicationController
         presents = day.css('div[@class="spresents"]').inner_text.gsub(/[　\n]/,"")
         title    = day.css('div[@class="stitle"]').inner_text.gsub(/[　\n]/,"")
         open     = day.css('div[@class="sopen"]').inner_text.gsub(/[　\n]/,"")
-        band     = day.css('div[@class="sband"]').inner_text.gsub(/[　\n]/,"")
+        band     = NKF.nkf("-w -X", day.css('div[@class="sband"]').inner_text.gsub(/[　\n]/,"") ) #nkfで半角カナを全角に
         work.push({:date => date, :presents => presents, :title => title, :open => open, :band => band})
       end
 
