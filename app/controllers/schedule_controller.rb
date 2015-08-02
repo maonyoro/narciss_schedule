@@ -7,6 +7,23 @@ class ScheduleController < ApplicationController
     @schedule = Schedule.all
   end
 
+  # 日付指定ビュー
+  def day
+    # GETパラメータから年月日を設定。データが欠けていたら今日の日付を設定
+    unless params[:date].nil?
+      day = params[:date]
+    else
+      day = Date.today.strftime("%Y-%m-%d")
+    end
+
+    # 設定した日付からDB検索
+    @schedule = Schedule.where(:date => day)
+
+    # 通常はday.htmlを表示
+    # 日付で検索した結果が0件だった場合、notfound.htmlを表示
+    render :action => 'notfound' if @schedule.count == 0
+  end
+
   # カレンダーデータ取得用API
   def json
     @schedule = Schedule.all

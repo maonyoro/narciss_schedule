@@ -3,6 +3,7 @@
 .day
   %h2= @schedule.date
   %h3= "#{@schedule.presents} #{@schedule.title}"
+  %a{:href => "/day?date=#{@schedule.date}", :target => "_blank"}permalink
   .open= @schedule.open.gsub("\\","￥").gsub("\/", "／")
   .contents
     =@schedule.band
