@@ -11,9 +11,9 @@
  * file per style scope.
  *
  *= require fullcalendar
- *
- *= require_tree .
  *= require_self
- *
  *= require jquery.modal
+ *= require simplex/loader
+ *= require simplex/bootswatch
+ *= require simplex/bootswatch
  */

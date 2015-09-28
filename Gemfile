@@ -29,6 +29,11 @@ gem 'anemone' # web crawler
 gem 'nokogiri'
 gem 'faraday' # http client
 
+gem 'twitter-bootstrap-rails'
+gem 'twitter-bootswatch-rails'
+gem 'twitter-bootswatch-rails-helpers'
+gem 'therubyracer'
+
 # Calendar
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'

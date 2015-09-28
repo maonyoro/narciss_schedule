@@ -2,11 +2,13 @@
 class ScheduleController < ApplicationController
   layout 'application'
 
+  # ----------------------------------------------
   # トップページ 全スケジュール表示
   def index
     @schedule = Schedule.all
   end
 
+  # ----------------------------------------------
   # 日付指定ビュー
   def day
     # GETパラメータから年月日を設定。データが欠けていたら今日の日付を設定
@@ -24,6 +26,7 @@ class ScheduleController < ApplicationController
     render :action => 'notfound' if @schedule.count == 0
   end
 
+  # ----------------------------------------------
   # カレンダーデータ取得用API
   def json
     @schedule = Schedule.all
@@ -45,6 +48,7 @@ class ScheduleController < ApplicationController
     render :json => json_data
   end
 
+  # ----------------------------------------------
   # スケジュールがクリックされたら、そのスケジュールだけ取得してレンダリングする
   def ajax
     param = params[:date]
