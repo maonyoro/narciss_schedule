@@ -1,0 +1,13 @@
+#header
+  %h1 Schedule at Urawa Narciss
+#calendar
+/#detail
+/  - @schedule.each do |s|
+/    .day
+/      %h2= s.date
+/      %h3= "#{s.presents} #{s.title}"
+/      .open= s.open.gsub("\\","￥").gsub("\/", "／")
+/      .contents
+/        =s.band
+
+#modalwindow.modal

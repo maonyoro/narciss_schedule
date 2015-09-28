@@ -1,13 +1,35 @@
-#header
-  %h1 Schedule at Urawa Narciss
-#calendar
-/#detail
-/  - @schedule.each do |s|
-/    .day
-/      %h2= s.date
-/      %h3= "#{s.presents} #{s.title}"
-/      .open= s.open.gsub("\\","￥").gsub("\/", "／")
-/      .contents
-/        =s.band
+.container
+  #header
+    .row
+      .col-md-12
+        %h1
+          なるすし！
+          %span.small ~ Schedule at Urawa Narciss ~
+  #warning
+    .row
+      .col-md-12
+        %p.bg-warning
+          本ページは全自動で生成されています。最新の正しい情報は必ず
+          %a{:href => "http://www.zmf.co.jp", :target => "_blank"} 浦和ナルシス公式Website
+          を確認してください。
+  #detail
+    - @schedule.each do |s|
+      .day
+        .row
+          .col-md-2
+            %h3= s.date
+          .col-md-10
+            %h3= "#{s.presents} #{s.title}"
+        .row
+          .col-md-10.col-md-offset-2
+            %h4.open= s.open.gsub("\\","￥").gsub("\/", "／")
+          .col-md-10.col-md-offset-2
+            .contents
+              %p=s.band
+        %hr
+  #footer
+    .row
+      .col-md-12
+        %p
+          %a{:href => "https://www.twitter.com/maonyoro", :target => "_blank"} つくったひと
 
-#modalwindow.modal

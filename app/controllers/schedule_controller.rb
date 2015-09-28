@@ -3,8 +3,14 @@ class ScheduleController < ApplicationController
   layout 'application'
 
   # ----------------------------------------------
-  # トップページ 全スケジュール表示
+  # トップページ
   def index
+    @schedule = Schedule.all
+  end
+
+  # ----------------------------------------------
+  # カレンダービュー
+  def calendar
     @schedule = Schedule.all
   end
 
