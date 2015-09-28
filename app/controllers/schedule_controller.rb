@@ -5,7 +5,22 @@ class ScheduleController < ApplicationController
   # ----------------------------------------------
   # トップページ
   def index
-    @schedule = Schedule.all
+    # 表示年月設定
+    # ?m=10&y=2015 なら2015年10月のデータを表示 nilや数字以外の場合はTime.nowを表示
+    @view_month = params[:m].to_i
+    @view_year  = params[:y].to_i
+    if @view_month==0 && @view_year==0
+      # クエリパラメータがない場合
+      @view_month = Time.now.month if @view_month == 0
+      @view_year  = Time.now.year  if @view_year  == 0
+      @schedule = Schedule.where('(month = ? or month = ?) and year = ?', Time.now.month, Time.now.month+1, Time.now.year)
+    else
+      #クエリパラメータを含む場合(片方だけの場合も)
+      @view_month = Time.now.month if @view_month == 0
+      @view_year  = Time.now.year  if @view_year  == 0
+      @current_view = "#{@view_year}年#{@view_month}月"
+      @schedule = Schedule.where(:month => @view_month, :year => @view_year)
+    end
   end
 
   # ----------------------------------------------

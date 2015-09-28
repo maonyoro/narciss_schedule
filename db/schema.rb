@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150711161350) do
+ActiveRecord::Schema.define(version: 20150928164506) do
 
   create_table "schedules", force: :cascade do |t|
-    t.string "date"
-    t.string "presents"
-    t.string "title"
-    t.string "open"
-    t.text   "band"
+    t.string  "date"
+    t.string  "presents"
+    t.string  "title"
+    t.string  "open"
+    t.text    "band"
+    t.integer "month"
+    t.integer "year"
   end
 
 end

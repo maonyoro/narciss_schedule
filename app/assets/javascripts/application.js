@@ -17,8 +17,9 @@
 
 //
 //= require moment
-//= require fullcalendar
 //= require jquery.modal
 //
 //= require simplex/loader
 //= require simplex/bootswatch
+//= require fullcalendar
+//= require index
