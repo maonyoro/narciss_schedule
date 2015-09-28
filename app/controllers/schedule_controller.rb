@@ -13,6 +13,7 @@ class ScheduleController < ApplicationController
       # クエリパラメータがない場合
       @view_month = Time.now.month if @view_month == 0
       @view_year  = Time.now.year  if @view_year  == 0
+      @current_view = "#{@view_year}年#{@view_month}月〜#{@view_month+1}月"
       @schedule = Schedule.where('(month = ? or month = ?) and year = ?', Time.now.month, Time.now.month+1, Time.now.year)
     else
       #クエリパラメータを含む場合(片方だけの場合も)
