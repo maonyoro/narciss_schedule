@@ -5,6 +5,9 @@ class ScheduleController < ApplicationController
   # ----------------------------------------------
   # トップページ
   def index
+    # view用
+    @today = Time.now.strftime("%Y-%m-%d")
+
     # 表示年月設定
     # ?m=10&y=2015 なら2015年10月のデータを表示 nilや数字以外の場合はTime.nowを表示
     @view_month = params[:m].to_i
