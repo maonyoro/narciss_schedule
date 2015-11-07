@@ -45,7 +45,7 @@ group :development, :test do
   gem 'spring'
 end
 
-# heroku
+# prod
 group :production do
   gem 'mysql2', '~> 0.3.20',  group: :production
 end
