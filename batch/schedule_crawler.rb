@@ -30,7 +30,9 @@ class ScheduleCrawler < ApplicationController
         presents = day.css('div[@class="spresents"]').inner_text.gsub(/[　\n]/,"")
         title    = day.css('div[@class="stitle"]').inner_text.gsub(/[　\n]/,"")
         open     = day.css('div[@class="sopen"]').inner_text.gsub(/[　\n]/,"")
-        band     = NKF.nkf("-w -X", day.css('div[@class="sband"]').inner_text.gsub(/[　\n]/,"").gsub('/', ' / ').gsub('  /  ', ' / ') ) #nkfで半角カナを全角に
+        link     = NKF.nkf("-w -X", day.css('div[@class="sband"]').inner_text).match(/http.*/).to_s.gsub(/ .*/,"")
+        band     = NKF.nkf("-w -X", day.css('div[@class="sband"]').inner_html).gsub(link,"").gsub('<br>', "/").gsub(/[　\n]/,"").gsub('/', ' / ').gsub('  /  ', ' / ') #nkfで半角カナを全角に
+        band = band+' <a href="'+link+'" target="_blank">'+link+'</a>' unless link.empty? #リンクを丁寧に設定してみる
         work.push({:date => date, :month => month, :presents => presents, :title => title, :open => open, :band => band})
       end
 

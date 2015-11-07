@@ -31,7 +31,7 @@ $ ->
     console.log 'close!'
     $('#modalwindow').empty()
 
-  change_color()
+  #change_color()
 
   $('.day').hover () ->
     $(@).css('background-color', '#F4F4F4')

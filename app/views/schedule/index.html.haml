@@ -70,7 +70,7 @@
             %h4.open= s.open.gsub("\\","￥").gsub("\/", "／")
           .col-md-10.col-md-offset-2
             .contents
-              %p=s.band
+              %p=s.band.html_safe
   #footer
     .row
       .col-md-12
