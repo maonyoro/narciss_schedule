@@ -5,6 +5,7 @@
         %a{:href => "/", :style => "text-decoration:none"}
           %h1
             %img{:src => (asset_path "narusushi.png")}
+            %br.formobile
             %span.small ~ Schedule of Urawa Narciss ~
       /.col-md-4.mode-button-area
       /  %a.btn.btn-sm.btn-default.pull-right{:href => "/calendar"} カレンダーモード
@@ -20,60 +21,92 @@
           %a{:href => "http://www.zmf.co.jp", :target => "_blank", style: "text-decoration:underline"} 浦和ナルシス公式Website
           を確認してください。
 .container
-  #selectmonth
-    .row
-      .col-md-4
-        %h2= @current_view unless @current_view.nil?
-      .col-md-8
-        %ul.pagination.pagination-sm.pull-right
-          %li
-            %a{:href => "?y=#{@view_year-1}&m=12"} &lt;&lt; #{@view_year-1}
-          %li
-            %a{:href => "?y=#{@view_year}&m=1", :class => ("active" if @view_month == 1)} 1
-          %li
-            %a{:href => "?y=#{@view_year}&m=2", :class => ("active" if @view_month == 2)} 2
-          %li
-            %a{:href => "?y=#{@view_year}&m=3", :class => ("active" if @view_month == 3)} 3
-          %li
-            %a{:href => "?y=#{@view_year}&m=4", :class => ("active" if @view_month == 4)} 4
-          %li
-            %a{:href => "?y=#{@view_year}&m=5", :class => ("active" if @view_month == 5)} 5
-          %li
-            %a{:href => "?y=#{@view_year}&m=6", :class => ("active" if @view_month == 6)} 6
-          %li
-            %a{:href => "?y=#{@view_year}&m=7", :class => ("active" if @view_month == 7)} 7
-          %li
-            %a{:href => "?y=#{@view_year}&m=8", :class => ("active" if @view_month == 8)} 8
-          %li
-            %a{:href => "?y=#{@view_year}&m=9", :class => ("active" if @view_month == 9)} 9
-          %li
-            %a{:href => "?y=#{@view_year}&m=10", :class => ("active" if @view_month == 10)} 10
-          %li
-            %a{:href => "?y=#{@view_year}&m=11", :class => ("active" if @view_month == 11)} 11
-          %li
-            %a{:href => "?y=#{@view_year}&m=12", :class => ("active" if @view_month == 12)} 12
-          %li
-            %a{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
-        %ul.pagination.pagination-sm.pull-right
-          %li
-            %a{:href => "/##{@today}"} 今日
+  - unless @view_year.nil?
+    #selectmonth
+      .row
+        .col-md-4
+          %h2= @current_view unless @current_view.nil?
+        .col-md-8
+          %ul.pagination.pull-right
+            %li
+              %a{:href => "?y=#{@view_year-1}&m=12"} &lt;&lt; #{@view_year-1}
+            %li
+              %a{:href => "?y=#{@view_year}&m=1", :class => ("active" if @view_month == 1)} 1
+            %li
+              %a{:href => "?y=#{@view_year}&m=2", :class => ("active" if @view_month == 2)} 2
+            %li
+              %a{:href => "?y=#{@view_year}&m=3", :class => ("active" if @view_month == 3)} 3
+            %li
+              %a{:href => "?y=#{@view_year}&m=4", :class => ("active" if @view_month == 4)} 4
+            %li
+              %a{:href => "?y=#{@view_year}&m=5", :class => ("active" if @view_month == 5)} 5
+            %li
+              %a{:href => "?y=#{@view_year}&m=6", :class => ("active" if @view_month == 6)} 6
+            %br.formobile
+            %li
+              %a{:href => "?y=#{@view_year}&m=7", :class => ("active" if @view_month == 7)} 7
+            %li
+              %a{:href => "?y=#{@view_year}&m=8", :class => ("active" if @view_month == 8)} 8
+            %li
+              %a{:href => "?y=#{@view_year}&m=9", :class => ("active" if @view_month == 9)} 9
+            %li
+              %a{:href => "?y=#{@view_year}&m=10", :class => ("active" if @view_month == 10)} 10
+            %li
+              %a{:href => "?y=#{@view_year}&m=11", :class => ("active" if @view_month == 11)} 11
+            %li
+              %a{:href => "?y=#{@view_year}&m=12", :class => ("active" if @view_month == 12)} 12
+            %li
+              %a{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
+          %ul.pagination.pull-right
+            %li
+              %a{:href => "/##{@today}"} 今日
   #detail
     - @schedule.each do |s|
-      .day{:class => ("bg-warning" if s.date==@today), :id => s.date}
-        .row
-          .col-md-2
-            %h3= s.date
-          .col-md-10
-            %h3= "#{s.presents} #{s.title}"
-        .row
-          .col-md-10.col-md-offset-2
-            %h4.open= s.open.gsub("\\","￥").gsub("\/", "／")
-          .col-md-10.col-md-offset-2
-            .contents
-              %p=s.band.html_safe
-  #footer
-    .row
-      .col-md-12
-        %p
-          %a.text-right{:href => "https://www.twitter.com/maonyoro", :target => "_blank"} つくったひと
+      - if @view=="index"
+        %a.daylink{:href => "/day?date=#{s.date}"}
+          .day{:class => ("today" if s.date==@today), :id => s.date}
+            .row
+              .col-md-3
+                %h2= s.date+" "+$wdays[Date.strptime(s.date).wday]
+              .col-md-9
+                %h4= s.title
+                %h4.dotted= s.open.gsub("\\","￥").gsub("\/", "／")
+                %h3.band= s.band.gsub(/<(.*?)>/,"")
+      - if @view=="day"
+        .dayone{:id => s.date}
+          .row
+            .col-md-12
+              %h2= s.date+" "+$wdays[Date.strptime(s.date).wday]
+              %table.table
+                %tr
+                  %td.heading タイトル
+                  %td= s.title
+                %tr
+                  %td.heading 時間／料金
+                  %td= s.open.gsub("\\","￥").gsub("\/", "／")
+                %tr
+                  %td.heading 出演者／詳細
+                  %td= s.band.html_safe
 
+  /Tweet Button
+  #socialbutton
+    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-hashtags="narusushi">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+#footer
+  .container
+    .row
+      .col-md-6
+        %h4 Link
+        %ul
+          %li
+            %a{:href => "https://goo.gl/maps/T6hm6Ja68hs", :target => "_blank"}浦和ナルシスの地図(Google Maps)
+      .col-md-6
+        %p.text-right
+          つくったひと:
+          %a{:href => "https://www.twitter.com/maonyoro", :target => "_blank"} @maonyoro
+        %p.text-right
+          不具合報告、要望、その他もろもろは DM や Reply
+          %br
+          または
+          %a{:href => "http://maonyoro.tumblr.com/contact", :target => "_blank"} こちらのフォーム
+          からお願いしまふ

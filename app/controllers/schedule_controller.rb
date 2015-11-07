@@ -2,9 +2,14 @@
 class ScheduleController < ApplicationController
   layout 'application'
 
+  # 曜日配列
+  $wdays = ["(日)", "(月)", "(火)", "(水)", "(木)", "(金)", "(土)"]
+
   # ----------------------------------------------
   # トップページ
   def index
+    @view = "index"
+
     # view用
     @today = Time.now.strftime("%Y-%m-%d")
 
@@ -36,6 +41,8 @@ class ScheduleController < ApplicationController
   # ----------------------------------------------
   # 日付指定ビュー
   def day
+    @view = "day"
+
     # GETパラメータから年月日を設定。データが欠けていたら今日の日付を設定
     unless params[:date].nil?
       day = params[:date]
@@ -46,9 +53,10 @@ class ScheduleController < ApplicationController
     # 設定した日付からDB検索
     @schedule = Schedule.where(:date => day)
 
-    # 通常はday.htmlを表示
+    # 通常はindex.htmlを表示
     # 日付で検索した結果が0件だった場合、notfound.htmlを表示
     render :action => 'notfound' if @schedule.count == 0
+    render :action => :index
   end
 
   # ----------------------------------------------
