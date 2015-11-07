@@ -31,10 +31,18 @@ $ ->
     console.log 'close!'
     $('#modalwindow').empty()
 
+  change_color()
+
+  $('.day').hover () ->
+    $(@).css('background-color', '#F4F4F4')
+  , () ->
+    $(@).css('background-color', '#FCFCFC')
+
 ## function for change color '/'
 change_color = ->
-  $('.fc-title').each ->
+  $('#detail .contents p').each ->
     txt = $(@).html()
     $(@).html(
       txt.replace(/\//g, '<span class="red">/</span>')
     )
+

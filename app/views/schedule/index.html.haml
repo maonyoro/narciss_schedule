@@ -6,19 +6,20 @@
           %h1
             %img{:src => (asset_path "narusushi.png")}
             %span.small ~ Schedule of Urawa Narciss ~
-      .col-md-4.mode-button-area
-        %a.btn.btn-sm.btn-default.pull-right{:href => "/calendar"} カレンダーモード
-        %a.btn.btn-sm.btn-default.pull-right{:href => "/", :style => "margin-right:10px"} ノーマルモード
+      /.col-md-4.mode-button-area
+      /  %a.btn.btn-sm.btn-default.pull-right{:href => "/calendar"} カレンダーモード
+      /  %a.btn.btn-sm.btn-default.pull-right{:href => "/", :style => "margin-right:10px"} ノーマルモード
     .row
       .col-md-8
-.container
-  #note
+#note
+  .container
     .row
       .col-md-12
         %p.text-danger
           本ページは全自動で生成されています。最新の正しい情報は必ず
           %a{:href => "http://www.zmf.co.jp", :target => "_blank", style: "text-decoration:underline"} 浦和ナルシス公式Website
           を確認してください。
+.container
   #selectmonth
     .row
       .col-md-4
@@ -53,9 +54,12 @@
             %a{:href => "?y=#{@view_year}&m=12", :class => ("active" if @view_month == 12)} 12
           %li
             %a{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
+        %ul.pagination.pagination-sm.pull-right
+          %li
+            %a{:href => "/##{@today}"} 今日
   #detail
     - @schedule.each do |s|
-      .day{:class => ("bg-warning" if s.date==@today)}
+      .day{:class => ("bg-warning" if s.date==@today), :id => s.date}
         .row
           .col-md-2
             %h3= s.date
