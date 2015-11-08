@@ -60,6 +60,13 @@ class ScheduleController < ApplicationController
   end
 
   # ----------------------------------------------
+  # update
+  def update
+    ScheduleCrawler.execute
+    render :action => :index
+  end
+
+  # ----------------------------------------------
   # カレンダーデータ取得用API
   def json
     @schedule = Schedule.all
@@ -87,6 +94,10 @@ class ScheduleController < ApplicationController
     param = params[:date]
     @schedule = Schedule.where(:date => param).first
     render :partial => "modal_window"
+  end
+
+  def test
+    render :text => "test"
   end
 
 end

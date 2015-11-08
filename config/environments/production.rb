@@ -79,6 +79,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #add
- config.threadsafe!
- config.dependency_loading = true if $rails_rake_task
+  config.dependency_loading = true if $rails_rake_task
 end

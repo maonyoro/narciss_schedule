@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 require 'nkf'
+require 'net/http'
 
 class ScheduleCrawler < ApplicationController
   class CrawlError < StandardError; end
 
-  URL = 'http://www.zmf.co.jp/schedule/'
+  $uri  = 'zmf.co.jp'
+  $path = '/schedule/index.html'
+  #URL = 'http://www.zmf.co.jp/schedule/'
   #URL = 'batch/201507.html'
 
   class << self
@@ -19,7 +22,13 @@ class ScheduleCrawler < ApplicationController
     # HTML取得しパース、DBへ格納するメソッド
     def get_detail
       # URLにアクセスし、得られたHTMLからパース用オブジェクトdocを生成
-      html = open(URL).read
+      if ENV["HTTP_PROXY"].nil?
+        html = open("http://"+$uri+$path).read
+      else
+        proxy = Net::HTTP::Proxy(ENV["HTTP_PROXY"])
+        http  = proxy.new($uri)
+        html  = http.get($path).body
+      end
       doc  = Nokogiri::HTML.parse(html, nil, 'CP932')
 
       # docをパースして、スケジュールの内容をwork[]にpushする

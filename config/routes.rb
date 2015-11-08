@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   get 'calendar' => 'schedule#calendar'
   get 'day' => 'schedule#day'
 
+  get 'update' => 'schedule#update'
   get 'json' => 'schedule#json'
   get 'ajax' => 'schedule#ajax'
+  get 'test' => 'schedule#test'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
