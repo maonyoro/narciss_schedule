@@ -69,9 +69,9 @@
               .col-md-3
                 %h2= s.date+" "+$wdays[Date.strptime(s.date).wday]
               .col-md-9
-                %h4= s.title
-                %h4.dotted= s.open.gsub("\\","￥").gsub("\/", "／")
-                %h3.band= s.band.gsub(/<(.*?)>/,"")
+                %h4= s.title.force_encoding("utf-8")
+                %h4.dotted= s.open.force_encoding("utf-8").gsub("\\","￥").gsub("\/", "／")
+                %h3.band= s.band.force_encoding("utf-8").gsub(/<(.*?)>/,"")
       - if @view=="day"
         .dayone{:id => s.date}
           .row
@@ -80,13 +80,13 @@
               %table.table
                 %tr
                   %td.heading タイトル
-                  %td= s.title
+                  %td= s.title.force_encoding("utf-8")
                 %tr
                   %td.heading 時間／料金
-                  %td= s.open.gsub("\\","￥").gsub("\/", "／")
+                  %td= s.open.force_encoding("utf-8").gsub("\\","￥").gsub("\/", "／")
                 %tr
                   %td.heading 出演者／詳細
-                  %td= s.band.html_safe
+                  %td= s.band.force_encoding("utf-8").html_safe
 
   /Tweet Button
   #socialbutton
