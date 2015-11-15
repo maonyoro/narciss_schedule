@@ -33,12 +33,6 @@ class ScheduleController < ApplicationController
   end
 
   # ----------------------------------------------
-  # カレンダービュー
-  def calendar
-    @schedule = Schedule.all
-  end
-
-  # ----------------------------------------------
   # 日付指定ビュー
   def day
     @view = "day"
@@ -64,6 +58,28 @@ class ScheduleController < ApplicationController
   def update
     ScheduleCrawler.execute
     render :action => :index
+  end
+
+  # ----------------------------------------------
+  # twitter
+  def twitter
+    client = Twitter::REST::Client.new do |config|
+      # developer
+      config.consumer_key         = Rails.application.secrets.twitter_consumer_key
+      config.consumer_secret      = Rails.application.secrets.twitter_consumer_secret
+      # user
+      config.access_token         = Rails.application.secrets.token
+      config.access_token_secret  = Rails.application.secrets.secret
+    end
+    
+    # Twitter投稿
+    client.update("これは自動投稿")
+  end
+
+  # ----------------------------------------------
+  # カレンダービュー
+  def calendar
+    @schedule = Schedule.all
   end
 
   # ----------------------------------------------

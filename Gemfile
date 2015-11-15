@@ -36,6 +36,9 @@ gem 'therubyracer'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
+# twitter
+gem 'twitter'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'pry-byebug'

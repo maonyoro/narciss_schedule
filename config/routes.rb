@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'day' => 'schedule#day'
 
   get 'update' => 'schedule#update'
+  get 'twitter' => 'schedule#twitter'
   get 'json' => 'schedule#json'
   get 'ajax' => 'schedule#ajax'
   get 'test' => 'schedule#test'
