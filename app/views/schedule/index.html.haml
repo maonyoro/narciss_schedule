@@ -26,44 +26,76 @@
       .row
         .col-md-4
           %h2= @current_view unless @current_view.nil?
-        .col-md-4.col-md-offset-4
-          .btn-group
-            %a.btn.btn-default{:href => "/##{@today}"} 今日
-          .btn-group
-            %a.btn.btn-default{:href => "?y=#{@view_year-1}&m=12"} &lt;&lt; #{@view_year-1}
-          .btn-group
-            %a.btn.btn-default 月
-            %a.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", "aria-expanded" => "false"}
-              %span.caret
-            %ul.dropdown-menu
-              %li
-              %li
-                %a{:href => "?y=#{@view_year}&m=1", :class => ("active" if @view_month == 1)} 1
-              %li
-                %a{:href => "?y=#{@view_year}&m=2", :class => ("active" if @view_month == 2)} 2
-              %li
-                %a{:href => "?y=#{@view_year}&m=3", :class => ("active" if @view_month == 3)} 3
-              %li
-                %a{:href => "?y=#{@view_year}&m=4", :class => ("active" if @view_month == 4)} 4
-              %li
-                %a{:href => "?y=#{@view_year}&m=5", :class => ("active" if @view_month == 5)} 5
-              %li
-                %a{:href => "?y=#{@view_year}&m=6", :class => ("active" if @view_month == 6)} 6
-              %li
-                %a{:href => "?y=#{@view_year}&m=7", :class => ("active" if @view_month == 7)} 7
-              %li
-                %a{:href => "?y=#{@view_year}&m=8", :class => ("active" if @view_month == 8)} 8
-              %li
-                %a{:href => "?y=#{@view_year}&m=9", :class => ("active" if @view_month == 9)} 9
-              %li
-                %a{:href => "?y=#{@view_year}&m=10", :class => ("active" if @view_month == 10)} 10
-              %li
-                %a{:href => "?y=#{@view_year}&m=11", :class => ("active" if @view_month == 11)} 11
-              %li
-                %a{:href => "?y=#{@view_year}&m=12", :class => ("active" if @view_month == 12)} 12
-          .btn-group
-            %a.btn.btn-default{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
+        .col-md-8
+          .button.pull-right
+            .navbar.navbar-default.panel.panel-default
+              .container-fluid
+                .navbar-header
+                  %ul.nav.navbar-nav
+                    %li
+                      %a.btn{:href => "/##{@today}"} 今日
+                    %li
+                      %a.btn{:href => "?y=#{@view_year-1}&m=12"} &lt;&lt; #{@view_year-1}
+                    %li.dropdown
+                      %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", "role" => "button", "aria-expanded" => "false"}
+                        = "#{@view_month}月"
+                        %span.caret
+                        %ul.dropdown-menu
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=1", :class => ("active" if @view_month == 1)} 1
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=2", :class => ("active" if @view_month == 2)} 2
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=3", :class => ("active" if @view_month == 3)} 3
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=4", :class => ("active" if @view_month == 4)} 4
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=5", :class => ("active" if @view_month == 5)} 5
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=6", :class => ("active" if @view_month == 6)} 6
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=7", :class => ("active" if @view_month == 7)} 7
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=8", :class => ("active" if @view_month == 8)} 8
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=9", :class => ("active" if @view_month == 9)} 9
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=10", :class => ("active" if @view_month == 10)} 10
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=11", :class => ("active" if @view_month == 11)} 11
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=12", :class => ("active" if @view_month == 12)} 12
+                    %li
+                      %a.btn{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
+  //.row
+  //  .col-md-11.col-md-offset-1
+  //    .navbar.navbar-default
+  //      .container-fluid
+  //        .navbar-header
+  //          %ul.nav.navbar-nav
+  //            %li
+  //              %a{:href => "#"} 今日
+  //            %li
+  //              %a{:href => "#"} &lt;&lt; 2014
+  //            %li.dropdown
+  //              %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", "role" => "button", "aria-expanded" => "false"}
+  //                = "#{@view_month}月"
+  //                %span.caret
+  //                %ul.dropdown-menu{:role => "menu"}
+  //                  %li
+  //                    %a{:href => "#"} 1
+  //                  %li
+  //                    %a{:href => "#"} 2
+  //                  %li
+  //                    %a{:href => "#"} 3
+  //            %li
+  //              %a{:href => "#"} 2016 &gt;&gt;
+
   #detail
+    .row
+      .col-md-12
+        .panel.panel-primary
+          .panel-body 予定をクリックすると詳細ページに飛びます
     - @schedule.each do |s|
       - if @view=="index"
         %a.daylink{:href => "/day?date=#{s.date}"}
