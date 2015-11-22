@@ -67,37 +67,14 @@
                             %a{:href => "?y=#{@view_year}&m=12", :class => ("active" if @view_month == 12)} 12
                     %li
                       %a.btn{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
-  //.row
-  //  .col-md-11.col-md-offset-1
-  //    .navbar.navbar-default
-  //      .container-fluid
-  //        .navbar-header
-  //          %ul.nav.navbar-nav
-  //            %li
-  //              %a{:href => "#"} 今日
-  //            %li
-  //              %a{:href => "#"} &lt;&lt; 2014
-  //            %li.dropdown
-  //              %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", "role" => "button", "aria-expanded" => "false"}
-  //                = "#{@view_month}月"
-  //                %span.caret
-  //                %ul.dropdown-menu{:role => "menu"}
-  //                  %li
-  //                    %a{:href => "#"} 1
-  //                  %li
-  //                    %a{:href => "#"} 2
-  //                  %li
-  //                    %a{:href => "#"} 3
-  //            %li
-  //              %a{:href => "#"} 2016 &gt;&gt;
 
   #detail
-    .row
-      .col-md-12
-        .panel.panel-primary
-          .panel-body 予定をクリックすると詳細ページに飛びます
-    - @schedule.each do |s|
-      - if @view=="index"
+    - if @view=="index"
+      .row
+        .col-md-12
+          .panel.panel-primary
+            .panel-body 予定をクリックすると詳細ページに飛びます
+      - @schedule.each do |s|
         %a.daylink{:href => "/day?date=#{s.date}"}
           .day{:class => ("today" if s.date==@today), :id => s.date}
             .row
@@ -107,7 +84,8 @@
                 %h4= s.title.force_encoding("utf-8")
                 %h4.dotted= s.open.force_encoding("utf-8").gsub("\\","￥").gsub("\/", "／")
                 %h3.band= s.band.force_encoding("utf-8").gsub(/<(.*?)>/,"")
-      - if @view=="day"
+    - if @view=="day"
+      - @schedule.each do |s|
         .dayone{:id => s.date}
           .row
             .col-md-12
@@ -125,7 +103,10 @@
 
   /Tweet Button
   #socialbutton
-    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-hashtags="narusushi">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    .twitter
+      <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-hashtags="narusushi">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    .line
+      <span><script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script><script type="text/javascript">new media_line_me.LineButton({"pc":false,"lang":"ja","type":"e"});</script></span>
 
 #footer
   .container
@@ -137,11 +118,11 @@
             %a{:href => "https://goo.gl/maps/T6hm6Ja68hs", :target => "_blank"}浦和ナルシスの地図(Google Maps)
       .col-md-6
         %p.text-right
-          つくったひと:
-          %a{:href => "https://www.twitter.com/maonyoro", :target => "_blank"} @maonyoro
+          Twitter: 
+          %a{:href => "https://www.twitter.com/narusushichan", :target => "_blank"} @narusushichan
         %p.text-right
           不具合報告、要望、その他もろもろは DM や Reply
           %br
           または
           %a{:href => "http://maonyoro.tumblr.com/contact", :target => "_blank"} こちらのフォーム
-          からお願いしまふ
+          からお願いします

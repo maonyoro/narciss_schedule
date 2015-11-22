@@ -34,7 +34,8 @@ $ ->
   #change_color()
 
   $('#detail .day').hover () ->
-    $(@).css('background-color', '#F4F4F4')
+    #$(@).css('background-color', '#F4F4F4')
+    $(@).css('background-color', '#FFFFCC')
   , () ->
     $(@).css('background-color', '#FCFCFC')
 
