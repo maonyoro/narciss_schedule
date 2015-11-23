@@ -1,5 +1,7 @@
 # encoding: utf-8
 namespace :daily_tweet do
   desc "narusushichanによるツイート"
-  TweetBatch.execute
+  task :execute => :environment do
+    TweetBatch.execute
+  end
 end

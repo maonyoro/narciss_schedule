@@ -6,7 +6,7 @@ class TweetBatch < ApplicationController
 
     def execute
       today = Date.today.strftime("%Y-%m-%d")
-      @schedule = Schedule.where(:date => day)
+      @schedule = Schedule.where(:date => today)
 
       client = Twitter::REST::Client.new do |config|
         # developer
@@ -18,7 +18,7 @@ class TweetBatch < ApplicationController
       end
 
       # Twitter投稿
-      client.update("#{Date.today.strftime("%Y年%m月%d日")}のスケジュール 出演: #{@schedule[0].band} http://narusushi.tk/day?date=#{today} #narusushi")
+      client.update("浦和ナルシス #{Date.today.strftime("%Y年%m月%d日")}のスケジュール 出演: #{@schedule[0].band} http://narusushi.tk/day?date=#{today} #narusushi")
     end
 
   end
