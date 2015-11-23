@@ -12,5 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
-//= require_tree .
+
+//
+//= require moment
+//= require jquery.modal
+//
+//= require simplex/loader
+//= require simplex/bootswatch
+//= require fullcalendar
+//= require index

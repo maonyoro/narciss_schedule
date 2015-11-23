@@ -2,6 +2,15 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  root 'schedule#index'
+  get 'calendar' => 'schedule#calendar'
+  get 'day' => 'schedule#day'
+
+  get 'update' => 'schedule#update'
+  get 'twitter' => 'schedule#twitter'
+  get 'json' => 'schedule#json'
+  get 'ajax' => 'schedule#ajax'
+  get 'test' => 'schedule#test'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

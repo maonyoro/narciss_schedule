@@ -1,28 +1,22 @@
-== README
+なるすし！
+====================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+http://narusushi.tk
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+概要
+--------------------
+
+浦和ナルシス公式サイト http://www.zmf.co.jp からスケジュール表示HTMLを取得しパース、DBに格納し以下の機能を実現
+
+- http://narusushi.tk で独自ビューを提供
+- 日付ごとにURLを付与し、告知時にURLを貼るだけで済むように設定
+- TweetボタンとLINEボタンを設置し拡散しやすくした
+- Twitterアカウント https://twitter.com/narusushichan と連動し、その日のスケジュールをTweet
+
+
+
+リリースノート
+--------------------
+
+- 0.1 一通りの機能を実装しβ版として公開

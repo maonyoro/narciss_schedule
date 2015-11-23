@@ -1,0 +1,135 @@
+#header
+  .container
+    .row
+      .col-md-8
+        %a{:href => "/", :style => "text-decoration:none"}
+          %h1
+            %img{:src => (asset_path "narusushi.png")}
+            %br.formobile
+            %span.small ~ Schedule of Urawa Narciss ~
+      /.col-md-4.mode-button-area
+      /  %a.btn.btn-sm.btn-default.pull-right{:href => "/calendar"} カレンダーモード
+      /  %a.btn.btn-sm.btn-default.pull-right{:href => "/", :style => "margin-right:10px"} ノーマルモード
+    .row
+      .col-md-8
+#note
+  .container
+    .row
+      .col-md-12
+        %p.text-danger
+          本ページは全自動で生成されています。最新の正しい情報は必ず
+          %a{:href => "http://www.zmf.co.jp", :target => "_blank", style: "text-decoration:underline"} 浦和ナルシス公式Website
+          を確認してください。
+
+// 年月ナビゲーション
+.container
+  - unless @view_year.nil?
+    #selectmonth
+      .row
+        .col-md-4
+          // 表示中の年月
+          %h2= @current_view unless @current_view.nil?
+        .col-md-8#switch-nav
+          // 年月切り替え
+          .button.pull-right
+            .navbar.navbar-default.panel.panel-default
+              .container-fluid
+                .navbar-header
+                  %ul.nav.navbar-nav
+                    /%li
+                    /  %a.btn{:href => "/##{@today}"} 今日
+                    %li
+                      %a.btn{:href => "?y=#{@view_year-1}&m=12"} &lt;&lt; #{@view_year-1}
+                    %li.dropdown
+                      %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", "role" => "button", "aria-expanded" => "false"}
+                        = "#{@view_month}月"
+                        %span.caret
+                        %ul.dropdown-menu
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=1", :class => ("active" if @view_month == 1)} 1
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=2", :class => ("active" if @view_month == 2)} 2
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=3", :class => ("active" if @view_month == 3)} 3
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=4", :class => ("active" if @view_month == 4)} 4
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=5", :class => ("active" if @view_month == 5)} 5
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=6", :class => ("active" if @view_month == 6)} 6
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=7", :class => ("active" if @view_month == 7)} 7
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=8", :class => ("active" if @view_month == 8)} 8
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=9", :class => ("active" if @view_month == 9)} 9
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=10", :class => ("active" if @view_month == 10)} 10
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=11", :class => ("active" if @view_month == 11)} 11
+                          %li
+                            %a{:href => "?y=#{@view_year}&m=12", :class => ("active" if @view_month == 12)} 12
+                    %li
+                      %a.btn{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
+
+  #detail
+    // トップページ用ビュー
+    - if @view=="index"
+      .row
+        .col-md-12
+          .panel.panel-primary
+            .panel-body 予定をクリックすると詳細ページに飛びます
+      - if @schedule.count == 0
+        %p データがありません
+      - @schedule.each do |s|
+        %a.daylink{:href => "/day?date=#{s.date}"}
+          .day{:class => ("today" if s.date==@today), :id => s.date}
+            .row
+              .col-md-3
+                %h2= s.date+" "+$wdays[Date.strptime(s.date).wday]
+              .col-md-9
+                %h4= s.title.force_encoding("utf-8")
+                %h4.dotted= s.open.force_encoding("utf-8").gsub("\\","￥").gsub("\/", "／")
+                %h3.band= s.band.force_encoding("utf-8").gsub(/<(.*?)>/,"")
+    // /day?date=YYYY-MM-DD 用ビュー
+    - if @view=="day"
+      .dayone{:id => @schedule[0].date}
+        .row
+          .col-md-12
+            %h2= @schedule[0].date+" "+$wdays[Date.strptime(@schedule[0].date).wday]
+            %table.table
+              %tr
+                %td.heading タイトル
+                %td= @schedule[0].title.force_encoding("utf-8")
+              %tr
+                %td.heading 時間／料金
+                %td= @schedule[0].open.force_encoding("utf-8").gsub("\\","￥").gsub("\/", "／")
+              %tr
+                %td.heading 出演者／詳細
+                %td= @schedule[0].band.force_encoding("utf-8").html_safe
+
+  // ソーシャルボタン
+  #socialbutton
+    .twitter
+      <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-hashtags="narusushi">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    .line
+      <span><script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script><script type="text/javascript">new media_line_me.LineButton({"pc":false,"lang":"ja","type":"e"});</script></span>
+
+#footer
+  .container
+    .row
+      .col-md-6
+        %h4 Link
+        %ul
+          %li
+            %a{:href => "https://goo.gl/maps/T6hm6Ja68hs", :target => "_blank"}浦和ナルシスの地図(Google Maps)
+      .col-md-6
+        %p.text-right
+          Twitter: 
+          %a{:href => "https://www.twitter.com/narusushichan", :target => "_blank"} @narusushichan
+        %p.text-right
+          不具合報告、要望、その他もろもろは DM や Reply
+          %br
+          または
+          %a{:href => "http://maonyoro.tumblr.com/contact", :target => "_blank"} こちらのフォーム
+          からお願いします

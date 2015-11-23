@@ -1,0 +1,59 @@
+#header
+  .container
+    .row
+      .col-md-8
+        %a{:href => "/", :style => "text-decoration:none"}
+          %h1
+            %img{:src => (asset_path "narusushi.png")}
+            %span.small ~ Schedule of Urawa Narciss ~
+      /.col-md-4.mode-button-area
+      /  %a.btn.btn-sm.btn-default.pull-right{:href => "/calendar"} カレンダーモード
+      /  %a.btn.btn-sm.btn-default.pull-right{:href => "/", :style => "margin-right:10px"} ノーマルモード
+    .row
+      .col-md-8
+#note
+  .container
+    .row
+      .col-md-12
+        %p.text-danger
+          本ページは全自動で生成されています。最新の正しい情報は必ず
+          %a{:href => "http://www.zmf.co.jp", :target => "_blank", style: "text-decoration:underline"} 浦和ナルシス公式Website
+          を確認してください。
+.container
+  #dayview
+    - @schedule.each do |s|
+      .day{:class => ("bg-warning" if s.date==@today), :id => s.date}
+        .row
+          .col-md-12
+            %h2= s.date+" "+$wdays[Date.strptime(s.date).wday]
+            %table.table.table-striped
+              %tr
+                %td.heading タイトル
+                %td= s.title
+              %tr
+                %td.heading 時間／料金
+                %td= s.open.gsub("\\","￥").gsub("\/", "／")
+              %tr
+                %td.heading 出演者／詳細
+                %td= s.band.html_safe
+
+  /Tweet Button
+  <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-hashtags="narusushi">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+#footer
+  .container
+    .row
+      .col-md-6
+        %ul
+          %li
+            %a{:href => "https://goo.gl/maps/T6hm6Ja68hs", :target => "_blank"}浦和ナルシスの地図(Google Maps)
+      .col-md-6
+        %p.text-right
+          つくったひと:
+          %a{:href => "https://www.twitter.com/maonyoro", :target => "_blank"} @maonyoro
+        %p.text-right
+          不具合報告、要望、その他もろもろは DM や Reply
+          %br
+          または
+          %a{:href => "http://maonyoro.tumblr.com/contact", :target => "_blank"} こちらのフォーム
+          からお願いします
