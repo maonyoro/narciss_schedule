@@ -63,6 +63,9 @@ class ScheduleController < ApplicationController
   # ----------------------------------------------
   # twitter
   def twitter
+    today = Date.today.strftime("%Y-%m-%d")
+    @schedule = Schedule.where(:date => day)
+
     client = Twitter::REST::Client.new do |config|
       # developer
       config.consumer_key         = Rails.application.secrets.twitter_consumer_key
@@ -71,9 +74,9 @@ class ScheduleController < ApplicationController
       config.access_token         = Rails.application.secrets.token
       config.access_token_secret  = Rails.application.secrets.secret
     end
-    
+
     # Twitter投稿
-    client.update("これは自動投稿")
+    client.update("#{Date.today.strftime("%Y年%m月%d日")}のスケジュール 出演: #{@schedule[0].band} http://narusushi.tk/day?date=#{today} #narusushi")
   end
 
   # ----------------------------------------------

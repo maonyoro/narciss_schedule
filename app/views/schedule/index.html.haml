@@ -20,20 +20,24 @@
           本ページは全自動で生成されています。最新の正しい情報は必ず
           %a{:href => "http://www.zmf.co.jp", :target => "_blank", style: "text-decoration:underline"} 浦和ナルシス公式Website
           を確認してください。
+
+// 年月ナビゲーション
 .container
   - unless @view_year.nil?
     #selectmonth
       .row
         .col-md-4
+          // 表示中の年月
           %h2= @current_view unless @current_view.nil?
-        .col-md-8
+        .col-md-8#switch-nav
+          // 年月切り替え
           .button.pull-right
             .navbar.navbar-default.panel.panel-default
               .container-fluid
                 .navbar-header
                   %ul.nav.navbar-nav
-                    %li
-                      %a.btn{:href => "/##{@today}"} 今日
+                    /%li
+                    /  %a.btn{:href => "/##{@today}"} 今日
                     %li
                       %a.btn{:href => "?y=#{@view_year-1}&m=12"} &lt;&lt; #{@view_year-1}
                     %li.dropdown
@@ -69,11 +73,14 @@
                       %a.btn{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
 
   #detail
+    // トップページ用ビュー
     - if @view=="index"
       .row
         .col-md-12
           .panel.panel-primary
             .panel-body 予定をクリックすると詳細ページに飛びます
+      - if @schedule.count == 0
+        %p データがありません
       - @schedule.each do |s|
         %a.daylink{:href => "/day?date=#{s.date}"}
           .day{:class => ("today" if s.date==@today), :id => s.date}
@@ -84,24 +91,24 @@
                 %h4= s.title.force_encoding("utf-8")
                 %h4.dotted= s.open.force_encoding("utf-8").gsub("\\","￥").gsub("\/", "／")
                 %h3.band= s.band.force_encoding("utf-8").gsub(/<(.*?)>/,"")
+    // /day?date=YYYY-MM-DD 用ビュー
     - if @view=="day"
-      - @schedule.each do |s|
-        .dayone{:id => s.date}
-          .row
-            .col-md-12
-              %h2= s.date+" "+$wdays[Date.strptime(s.date).wday]
-              %table.table
-                %tr
-                  %td.heading タイトル
-                  %td= s.title.force_encoding("utf-8")
-                %tr
-                  %td.heading 時間／料金
-                  %td= s.open.force_encoding("utf-8").gsub("\\","￥").gsub("\/", "／")
-                %tr
-                  %td.heading 出演者／詳細
-                  %td= s.band.force_encoding("utf-8").html_safe
+      .dayone{:id => @schedule[0].date}
+        .row
+          .col-md-12
+            %h2= @schedule[0].date+" "+$wdays[Date.strptime(@schedule[0].date).wday]
+            %table.table
+              %tr
+                %td.heading タイトル
+                %td= @schedule[0].title.force_encoding("utf-8")
+              %tr
+                %td.heading 時間／料金
+                %td= @schedule[0].open.force_encoding("utf-8").gsub("\\","￥").gsub("\/", "／")
+              %tr
+                %td.heading 出演者／詳細
+                %td= @schedule[0].band.force_encoding("utf-8").html_safe
 
-  /Tweet Button
+  // ソーシャルボタン
   #socialbutton
     .twitter
       <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-hashtags="narusushi">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

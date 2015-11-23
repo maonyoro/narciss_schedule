@@ -41,7 +41,7 @@ $color6: #826754
     display: inline
 
 .today
-  background-color: #F0F0F0 !important
+  background-color: $color3 !important
 
 .dotted
   border-bottom: 1px dotted #888888
@@ -70,8 +70,11 @@ a
   margin-bottom: 10px
 
 #selectmonth
-  margin-top: 5px
+  a
+    color: $fontcolor
   margin-bottom: 20px
+  #switch-nav
+    margin-top: 10px
 
 #detail
   a.daylink
@@ -121,11 +124,11 @@ a
 
 #socialbutton
   margin-top: 30px
-  .twitter
+  div
     display: inline-block
+  .twitter
     margin-right: 10px
   .line
-    display: inline-block
 
 #footer
   width: 100%
