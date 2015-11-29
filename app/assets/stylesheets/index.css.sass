@@ -36,15 +36,28 @@ $color6: #826754
   background-color: $color5 !important
 
 .formobile
-  display: none
+  display: none !important
   @media #{$mobile}
-    display: inline
+    display: inline !important
+
+.mobile-right
+  @media #{$mobile}
+    float: right
+    margin-bottom: 10px
+
+.forpc
+  display: inline !important
+  @media #{$mobile}
+    display: none !important
 
 .today
   background-color: $color3 !important
 
 .dotted
   border-bottom: 1px dotted #888888
+
+.inblock
+  display: inline-block !important
 
 // ---------------------------
 // style for tags
@@ -73,8 +86,12 @@ a
   a
     color: $fontcolor
   margin-bottom: 20px
+  h2
+    font-size: 30px
+    margin-top: 20px
+    span
   #switch-nav
-    margin-top: 10px
+    //margin-top: 10px
 
 #detail
   a.daylink
@@ -138,6 +155,13 @@ a
   padding-bottom: 50px
   h4
     margin-top: 0
+
+// ---------------------------
+// override bootstrap
+//.btn-default, .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default
+//  background-image: none
+//  background-color: $color5
+//  border: 0
 
 
 // ---------------------------
