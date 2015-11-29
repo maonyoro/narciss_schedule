@@ -6,7 +6,7 @@
           %h1
             %img{:src => (asset_path "narusushi.png")}
             %br.formobile
-            %span.small ~ Schedule of Urawa Narciss ~
+            %span.small.mobile-right ~ Schedule of Urawa Narciss ~
       /.col-md-4.mode-button-area
       /  %a.btn.btn-sm.btn-default.pull-right{:href => "/calendar"} カレンダーモード
       /  %a.btn.btn-sm.btn-default.pull-right{:href => "/", :style => "margin-right:10px"} ノーマルモード
@@ -26,51 +26,45 @@
   - unless @view_year.nil?
     #selectmonth
       .row
-        .col-md-4
-          // 表示中の年月
-          %h2= @current_view unless @current_view.nil?
-        .col-md-8#switch-nav
+        .col-md-12
           // 年月切り替え
-          .button.pull-right
-            .navbar.navbar-default.panel.panel-default
-              .container-fluid
-                .navbar-header
-                  %ul.nav.navbar-nav
-                    /%li
-                    /  %a.btn{:href => "/##{@today}"} 今日
-                    %li
-                      %a.btn{:href => "?y=#{@view_year-1}&m=12"} &lt;&lt; #{@view_year-1}
-                    %li.dropdown
-                      %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", "role" => "button", "aria-expanded" => "false"}
-                        = "#{@view_month}月"
-                        %span.caret
-                        %ul.dropdown-menu
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=1", :class => ("active" if @view_month == 1)} 1
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=2", :class => ("active" if @view_month == 2)} 2
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=3", :class => ("active" if @view_month == 3)} 3
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=4", :class => ("active" if @view_month == 4)} 4
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=5", :class => ("active" if @view_month == 5)} 5
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=6", :class => ("active" if @view_month == 6)} 6
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=7", :class => ("active" if @view_month == 7)} 7
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=8", :class => ("active" if @view_month == 8)} 8
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=9", :class => ("active" if @view_month == 9)} 9
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=10", :class => ("active" if @view_month == 10)} 10
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=11", :class => ("active" if @view_month == 11)} 11
-                          %li
-                            %a{:href => "?y=#{@view_year}&m=12", :class => ("active" if @view_month == 12)} 12
-                    %li
-                      %a.btn{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
+          .button#switch-nav
+            .btn-group
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %h2
+                  = @current_view unless @current_view.nil?
+                  %button.btn.btn-xs
+                    %span.caret
+                /= "#{@view_month}月"
+              %ul.dropdown-menu
+                %li
+                  %a{:href => "?y=#{@view_year-1}&m=12"} &lt;&lt; #{@view_year-1}
+                %li
+                  %a{:href => "?y=#{@view_year}&m=1", :class => ("active" if @view_month == 1)} 1
+                %li
+                  %a{:href => "?y=#{@view_year}&m=2", :class => ("active" if @view_month == 2)} 2
+                %li
+                  %a{:href => "?y=#{@view_year}&m=3", :class => ("active" if @view_month == 3)} 3
+                %li
+                  %a{:href => "?y=#{@view_year}&m=4", :class => ("active" if @view_month == 4)} 4
+                %li
+                  %a{:href => "?y=#{@view_year}&m=5", :class => ("active" if @view_month == 5)} 5
+                %li
+                  %a{:href => "?y=#{@view_year}&m=6", :class => ("active" if @view_month == 6)} 6
+                %li
+                  %a{:href => "?y=#{@view_year}&m=7", :class => ("active" if @view_month == 7)} 7
+                %li
+                  %a{:href => "?y=#{@view_year}&m=8", :class => ("active" if @view_month == 8)} 8
+                %li
+                  %a{:href => "?y=#{@view_year}&m=9", :class => ("active" if @view_month == 9)} 9
+                %li
+                  %a{:href => "?y=#{@view_year}&m=10", :class => ("active" if @view_month == 10)} 10
+                %li
+                  %a{:href => "?y=#{@view_year}&m=11", :class => ("active" if @view_month == 11)} 11
+                %li
+                  %a{:href => "?y=#{@view_year}&m=12", :class => ("active" if @view_month == 12)} 12
+                %li
+                  %a{:href => "?y=#{@view_year+1}&m=1"} #{@view_year+1} &gt;&gt;
 
   #detail
     // トップページ用ビュー
@@ -112,15 +106,19 @@
   #socialbutton
     .twitter
       <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-hashtags="narusushi">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs'); twttr.widgets.load();</script>
-    .line
-      <a href="http://line.me/R/msg/text/?LINE%E3%81%A7%E9%80%81%E3%82%8B%0D%0Ahttp%3A%2F%2Fline.me%2F"><img src="/img/linebutton_36x60.png" width="36px" height="60px" alt="LINEで送る" /></a>
+    - if @view=="day"
+      .line.formobile
+        - line_text="浦和ナルシス #{@schedule[0].date.sub('-','年').sub('-','月').<<('日')}のスケジュール #{request.url}"
+        %a{:href => URI.escape("http://line.me/R/msg/text/?#{line_text}")}
+          %img{:src => "/img/linebutton_36x60.png", :width => "36px", :height => "60px", :alt => "LINEで送る"}
 
 #footer
   .container
     .row
       .col-md-6
-        %h4 Link
         %ul
+          %li
+            %a{:href => "/aboutme"}このページについて
           %li
             %a{:href => "https://goo.gl/maps/T6hm6Ja68hs", :target => "_blank"}浦和ナルシスの地図(Google Maps)
       .col-md-6
@@ -128,8 +126,4 @@
           Twitter: 
           %a{:href => "https://www.twitter.com/narusushichan", :target => "_blank"} @narusushichan
         %p.text-right
-          不具合報告、要望、その他もろもろは DM や Reply
-          %br
-          または
-          %a{:href => "http://maonyoro.tumblr.com/contact", :target => "_blank"} こちらのフォーム
-          からお願いします
+          不具合報告、要望、その他もろもろは DM や Reply からお願いします
