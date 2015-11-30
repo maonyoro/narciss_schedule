@@ -24,3 +24,4 @@ http://narusushi.tk
 - 0.3 Twitter140文字制限を考慮
 - 0.4 ソーシャルボタンをTurbolink時も表示されるよう修正
 - 0.5 もろもろupdateして大体完成かな
+- 0.6 tweetボタン用titleタグ修正 12月に13月の表示が出るバグを修正
