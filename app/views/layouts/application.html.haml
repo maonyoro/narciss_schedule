@@ -4,9 +4,7 @@
     - if @view=="index"
       %title なるすし！ ~Schedule of Urawa Narciss~
     - if @view=="day"
-      %title
-        #{@schedule[0].date.sub("-","年").sub("-","月").<<("日")}
-        浦和ナルシスのスケジュール 出演...#{@schedule[0].band.force_encoding("utf-8")} - なるすし！
+      %title= @title_text
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
