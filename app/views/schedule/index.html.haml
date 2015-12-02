@@ -104,13 +104,14 @@
 
   // ソーシャルボタン
   #socialbutton
-    .twitter
-      <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs'); twttr.widgets.load();</script>
     - if @view=="day"
-      .line.formobile
-        - line_text="浦和ナルシス #{@schedule[0].date.sub('-','年').sub('-','月').<<('日')}のスケジュール #{request.url}"
-        %a{:href => URI.escape("http://line.me/R/msg/text/?#{line_text}")}
-          %img{:src => "/img/linebutton_36x60.png", :width => "36px", :height => "60px", :alt => "LINEで送る"}
+      .twitter
+        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs'); twttr.widgets.load();</script>
+      - if @view=="day"
+        .line.formobile
+          - line_text="浦和ナルシス #{@schedule[0].date.sub('-','年').sub('-','月').<<('日')}のスケジュール #{request.url}"
+          %a{:href => URI.escape("http://line.me/R/msg/text/?#{line_text}")}
+            %img{:src => "/img/linebutton_36x60.png", :width => "36px", :height => "60px", :alt => "LINEで送る"}
 
 #footer
   .container

@@ -40,9 +40,9 @@ class ScheduleController < ApplicationController
     @schedule = Schedule.where(:date => day)
 
     # ツイートボタン用 <title>タグ内テキスト
-    @title_text="#{day.sub('-','年').sub('-','月').<<('日')} 浦和ナルシス - #{@schedule[0].band.force_encoding("utf-8")}"
-    if @title_text.length > 80
-      @title_text.slice!(79, @title_text.length)
+    @title_text="#{day.sub('-','年').sub('-','月').<<('日')} 浦和ナルシス - #{@schedule[0].band.force_encoding("utf-8").gsub(' / ','/')}"
+    if @title_text.length > 95
+      @title_text.slice!(94, @title_text.length)
       @title_text.<<("…")
     end
 
