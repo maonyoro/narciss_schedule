@@ -40,11 +40,12 @@ class ScheduleController < ApplicationController
     @schedule = Schedule.where(:date => day)
 
     # ツイートボタン用 <title>タグ内テキスト
-    @title_text="#{day.sub('-','年').sub('-','月').<<('日')} 浦和ナルシス - #{@schedule[0].band.force_encoding("utf-8").gsub(' / ','/')}"
-    if @title_text.length > 95
-      @title_text.slice!(94, @title_text.length)
-      @title_text.<<("…")
+    @tweet_text="#{day.sub('-','年').sub('-','月').<<('日')} 浦和ナルシス\n#{@schedule[0].band.force_encoding("utf-8").gsub(' / ','/')}"
+    if @tweet_text.length > 95
+      @tweet_text.slice!(94, @tweet_text.length)
+      @tweet_text.<<("…")
     end
+    @tweet_text.<<("\n")
 
     # 通常はindex.htmlを表示
     # 日付で検索した結果が0件だった場合、notfound.htmlを表示

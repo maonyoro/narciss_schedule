@@ -4,7 +4,7 @@
     - if @view=="index"
       %title なるすし！ ~Schedule of Urawa Narciss~
     - if @view=="day"
-      %title= @title_text
+      %title= "#{@schedule[0].date} - なるすし！ ~Schedule of Urawa Narciss~"
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
