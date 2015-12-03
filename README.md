@@ -26,3 +26,4 @@ http://narusushi.tk
 - 0.5 もろもろupdateして大体完成かな
 - 0.6 tweetボタン用titleタグ修正 12月に13月の表示が出るバグを修正
 - 0.7 tweetボタン周りを修正
+- 0.8 tweetに改行を含めるようにした
