@@ -18,12 +18,12 @@ class TweetBatch < ApplicationController
       end
 
       # Twitter投稿
-      text="浦和ナルシス #{Date.today.strftime("%Y年%m月%d日")}のスケジュール 出演: #{@schedule[0].band.force_encoding("utf-8").gsub(' / ','/')}"
+      text="浦和ナルシス #{Date.today.strftime("%Y年%m月%d日")}のスケジュール\n#{@schedule[0].band.force_encoding("utf-8").gsub(' / ','/')}"
       if text.length > 95
         text.slice!(94, text.length)
         text.<<("…")
       end
-      text.<<(" http://narusushi.tk/day?date=#{today}")
+      text.<<("\nhttp://narusushi.tk/day?date=#{today}")
       client.update(text)
     end
 
