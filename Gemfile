@@ -54,3 +54,7 @@ group :production do
   gem 'mysql'
   gem 'mysql2', '~> 0.3.20',  group: :production
 end
+
+group :heroku do
+  gem 'pg'
+end
