@@ -21,7 +21,7 @@ class ScheduleController < ApplicationController
     @view_month = Time.now.month if @view_month == 0
     @view_year  = Time.now.year  if @view_year  == 0
     @current_view = "#{@view_year}年#{@view_month}月"
-    @schedule = Schedule.where(:month => @view_month, :year => @view_year)
+    @schedule = Schedule.where(:month => @view_month, :year => @view_year).order('date')
   end
 
   # ----------------------------------------------
