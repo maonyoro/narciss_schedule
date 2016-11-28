@@ -76,7 +76,7 @@ class ScheduleController < ApplicationController
     end
 
     # Twitter投稿
-    client.update("#{Date.today.strftime("%Y年%m月%d日")}のスケジュール 出演: #{@schedule[0].band} http://narusushi.tk/day?date=#{today} #narusushi")
+    client.update("#{Date.today.strftime("%Y年%m月%d日")}のスケジュール 出演: #{@schedule[0].band} https://narusushi.herokuapp.com/day?date=#{today} #narusushi")
   end
 
   # ----------------------------------------------

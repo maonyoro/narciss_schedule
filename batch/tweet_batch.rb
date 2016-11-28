@@ -23,7 +23,7 @@ class TweetBatch < ApplicationController
         text.slice!(101, text.length)
         text.<<("…")
       end
-      text.<<("\nhttp://narusushi.tk/day?date=#{today}")
+      text.<<("\nhttps://narusushi.herokuapp.com/day?date=#{today}")
       client.update(text)
     end
 

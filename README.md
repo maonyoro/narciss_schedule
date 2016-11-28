@@ -28,3 +28,4 @@ http://narusushi.tk
 - 0.7 tweetボタン周りを修正
 - 0.8 tweetに改行を含めるようにした
   - 0.8.1 なるすしちゃんのツイートも改行込みに変更
+- 0.9 narusushi.herokuapp.comに変更
